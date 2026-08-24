@@ -30,6 +30,8 @@
   border-radius: 0.75rem;
   object-fit: cover;
   margin-bottom: 1rem;
+  overflow: hidden;
+  display: block;
 }
 
 .login-logo-placeholder {

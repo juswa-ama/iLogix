@@ -1,12 +1,14 @@
 import { useState } from "react";
 import "./AdminLogin.css";
+import nvatLogo from "./NVATlogo.png";
 
-export default function AdminLogin({ logoUrl, onSubmit }) {
+export default function AdminLogin({ onSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepSignedIn, setKeepSignedIn] = useState(true);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [logoFailed, setLogoFailed] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,10 +34,14 @@ export default function AdminLogin({ logoUrl, onSubmit }) {
   return (
     <div className="login-page">
       <div className="login-card">
-        {/* Logo */}
         <div className="login-header">
-          {logoUrl ? (
-            <img src={logoUrl} alt="iLogix logo" className="login-logo-img" />
+          {!logoFailed ? (
+            <img
+              src={nvatLogo}
+              alt="iLogix logo"
+              className="login-logo-img"
+              onError={() => setLogoFailed(true)}
+            />
           ) : (
             <div className="login-logo-placeholder">
               <span role="img" aria-label="iLogix">
@@ -50,13 +56,11 @@ export default function AdminLogin({ logoUrl, onSubmit }) {
           </p>
         </div>
 
-        {/* Heading */}
         <div className="login-heading">
           <h2>Sign In</h2>
           <p>Enter your credentials to access the portal</p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="login-form">
           <div className="login-field">
             <label htmlFor="email">Username or Email</label>
