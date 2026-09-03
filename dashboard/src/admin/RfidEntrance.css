@@ -1,0 +1,13 @@
+.rfid-tag-cell {
+  border: 0 !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.rfid-tag-cell.flagged {
+  color: #dc2626;
+}
+
+.rfid-tag-cell.normal {
+  color: var(--color-text-dark);
+}

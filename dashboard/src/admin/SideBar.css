@@ -1,0 +1,88 @@
+.sidebar-paper {
+  width: 260px;
+  box-sizing: border-box;
+  background-color: var(--color-primary) !important;
+  color: #ffffff !important;
+  border: none !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 24px 24px;
+}
+
+.sidebar-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.sidebar-brand-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.sidebar-brand-sub {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.sidebar-nav {
+  padding: 0 16px;
+  margin-top: 8px;
+}
+
+.sidebar-nav-item {
+  border-radius: 8px !important;
+  margin-bottom: 4px !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.sidebar-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.sidebar-nav-item.Mui-selected {
+  background-color: #ffffff !important;
+  color: var(--color-primary) !important;
+}
+
+.sidebar-nav-item.Mui-selected:hover {
+  background-color: #ffffff !important;
+}
+
+.sidebar-nav-icon {
+  min-width: 36px !important;
+  color: inherit !important;
+}
+
+.sidebar-nav-label .MuiListItemText-primary {
+  font-size: 0.85rem;
+}
+
+.sidebar-footer {
+  padding: 16px;
+}
+
+.sidebar-logout-btn {
+  justify-content: flex-start !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  font-size: 0.8rem !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.sidebar-logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}

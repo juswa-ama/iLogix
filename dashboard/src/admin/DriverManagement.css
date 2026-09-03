@@ -1,0 +1,35 @@
+.action-icon-btn {
+  border-radius: 6px !important;
+}
+
+.action-icon-btn.edit {
+  background-color: #dbeafe !important;
+  color: #1d4ed8 !important;
+}
+
+.action-icon-btn.edit:hover {
+  background-color: #bfdbfe !important;
+}
+
+.action-icon-btn.suspend {
+  background-color: #fef3c7 !important;
+  color: #b45309 !important;
+}
+
+.action-icon-btn.suspend:hover {
+  background-color: #fde68a !important;
+}
+
+.action-icon-btn.delete {
+  background-color: #fee2e2 !important;
+  color: #dc2626 !important;
+}
+
+.action-icon-btn.delete:hover {
+  background-color: #fecaca !important;
+}
+
+.action-icon-group {
+  display: flex;
+  gap: 6px;
+}
