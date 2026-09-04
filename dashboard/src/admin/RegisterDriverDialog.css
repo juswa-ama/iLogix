@@ -1,0 +1,221 @@
+.register-driver-paper {
+  border-radius: 16px !important;
+  padding: 0;
+}
+
+.rd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px 16px;
+}
+
+.rd-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.rd-subtitle {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 4px 0 0;
+}
+
+.rd-close-btn {
+  color: var(--color-text-muted) !important;
+}
+
+.rd-steps {
+  display: flex;
+  gap: 24px;
+  background-color: var(--color-bg);
+  margin: 0 24px 20px;
+  padding: 14px 16px;
+  border-radius: 10px;
+}
+
+.rd-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.55;
+}
+
+.rd-step.active {
+  opacity: 1;
+}
+
+.rd-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rd-step-num.active {
+  background-color: var(--color-primary);
+}
+
+.rd-step-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.rd-step-sub {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.rd-body {
+  padding: 0 24px 24px;
+}
+
+.rd-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0 0 14px;
+}
+
+.rd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+}
+
+.rd-field.full {
+  grid-column: 1 / -1;
+}
+
+.rd-field-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-body);
+  margin-bottom: 6px;
+}
+
+.rd-field .MuiOutlinedInput-root {
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+.rd-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.rd-footer-split {
+  justify-content: space-between;
+}
+
+.rd-footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+/* Step 2 — RFID */
+.rd-rfid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.rd-rfid-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rd-scan-box {
+  border: 1.5px dashed var(--color-primary);
+  background-color: #f0fdf4;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  gap: 4px;
+}
+
+.rd-scan-icon {
+  color: var(--color-primary);
+  font-size: 1.6rem !important;
+  margin-bottom: 4px;
+}
+
+.rd-scan-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.rd-scan-sub {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin: 0 0 10px;
+}
+
+.rd-scan-btn {
+  width: 100%;
+}
+
+.rd-summary {
+  background-color: var(--color-bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.rd-summary-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  margin: 0 0 10px;
+}
+
+.rd-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.rd-summary-item-label {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  margin: 0 0 2px;
+}
+
+.rd-summary-item-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .rd-grid,
+  .rd-rfid-grid,
+  .rd-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
