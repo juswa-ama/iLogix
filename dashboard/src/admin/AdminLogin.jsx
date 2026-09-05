@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./AdminLogin.css";
 import nvatLogo from "./NVATlogo.png";
 
-export default function AdminLogin({ onSubmit }) {
-  const [email, setEmail] = useState("");
+export default function AdminLogin({ onLoginSuccess }) {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [keepSignedIn, setKeepSignedIn] = useState(true);
   const [error, setError] = useState("");
@@ -14,18 +14,47 @@ export default function AdminLogin({ onSubmit }) {
     e.preventDefault();
     setError("");
 
-    if (!email || !password) {
-      setError("Please enter both your username/email and password.");
+    if (!username || !password) {
+      setError("Please enter both your username and password.");
       return;
     }
 
-    if (!onSubmit) return;
-
     try {
       setLoading(true);
-      await onSubmit({ email, password, keepSignedIn });
+
+      const response = await fetch("http://localhost:3001/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Invalid credentials.");
+      }
+
+      // Store JWT
+      if (keepSignedIn) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("admin", JSON.stringify(data.admin));
+      } else {
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("admin", JSON.stringify(data.admin));
+      }
+
+      // Tell parent that login was successful
+      if (onLoginSuccess) {
+        onLoginSuccess(data.admin);
+      }
+
     } catch (err) {
-      setError(err?.message || "Unable to sign in. Please try again.");
+      setError(err.message || "Unable to sign in. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -34,6 +63,7 @@ export default function AdminLogin({ onSubmit }) {
   return (
     <div className="login-page">
       <div className="login-card">
+
         <div className="login-header">
           {!logoFailed ? (
             <img
@@ -51,6 +81,7 @@ export default function AdminLogin({ onSubmit }) {
           )}
 
           <h1 className="login-title">iLogix</h1>
+
           <p className="login-subtitle">
             Nueva Vizcaya <strong>Agricultural Terminal</strong>
           </p>
@@ -62,31 +93,37 @@ export default function AdminLogin({ onSubmit }) {
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
+
           <div className="login-field">
-            <label htmlFor="email">Username or Email</label>
+            <label htmlFor="username">Username</label>
+
             <input
-              id="email"
+              id="username"
               type="text"
               autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@ilogix.com"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="admin"
               className="login-input"
             />
           </div>
 
           <div className="login-field">
+
             <div className="login-field-row">
               <label htmlFor="password">Password</label>
+
               <button
                 type="button"
                 className="login-forgot-btn"
                 onClick={() => {
+                  // Forgot password functionality can be added later
                 }}
               >
                 Forgot password?
               </button>
             </div>
+
             <input
               id="password"
               type="password"
@@ -108,14 +145,26 @@ export default function AdminLogin({ onSubmit }) {
             >
               <span className="login-toggle-knob" />
             </button>
-            <span className="login-toggle-label">Keep me signed in</span>
+
+            <span className="login-toggle-label">
+              Keep me signed in
+            </span>
           </div>
 
-          {error && <p className="login-error">{error}</p>}
+          {error && (
+            <p className="login-error">
+              {error}
+            </p>
+          )}
 
-          <button type="submit" disabled={loading} className="login-submit-btn">
+          <button
+            type="submit"
+            disabled={loading}
+            className="login-submit-btn"
+          >
             {loading ? "Signing in..." : "Sign In to Portal"}
           </button>
+
         </form>
 
         <p className="login-footer">
@@ -124,7 +173,9 @@ export default function AdminLogin({ onSubmit }) {
             Contact your administrator
           </a>
         </p>
+
       </div>
     </div>
   );
 }
+
