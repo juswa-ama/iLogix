@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { Box, CssBaseline } from "@mui/material";
+import { useState } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Dashboard from "./admin/Dashboard";
 import DriverManagement from "./admin/DriverManagement";
 import InboundDeliveries from "./admin/InboundDeliveries";
-import RfidEntrance from "./admin/RfidEntrance";
 import ReportsAnalytics from "./admin/ReportAnalytics";
+import RfidEntrance from "./admin/RfidEntrance";
 import Sidebar, { SIDEBAR_WIDTH } from "./admin/SideBar";
+import DriverApp from "./driver/DriverApp";
 import Login from "./login/login";
 import GateApp from "./terminal/GateApp";
 
@@ -65,6 +66,7 @@ export default function App() {
       <Route path="/" element={<Login />} />
       <Route path="/admin/*" element={<AdminArea />} />
       <Route path="/gate/*" element={<GateApp />} />
+      <Route path="/driver/*" element={<DriverApp />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

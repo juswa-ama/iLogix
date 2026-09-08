@@ -1,0 +1,154 @@
+.driver-home {
+  min-height: calc(100vh - 34px);
+  background: #081426;
+  color: white;
+  padding: 25px 20px 20px;
+  box-sizing: border-box;
+}
+
+.driver-home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 42px;
+}
+
+.driver-home-header small {
+  display: block;
+  margin-bottom: 6px;
+  color: #a5b1bd;
+  font-size: 12px;
+}
+
+.driver-home-header h1 {
+  margin: 0;
+  font-size: 22px;
+  color: white;
+}
+
+.driver-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0c9b65;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.driver-home-account {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.driver-logout-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #a5b1bd;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.driver-home-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-delivery-card {
+  padding: 22px;
+  border-radius: 18px;
+  background: #162b48;
+  border: 1px solid #223b5c;
+}
+
+.driver-truck-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background: #223b5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.driver-delivery-card > div > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #b1bfca;
+}
+
+.driver-delivery-card h2 {
+  margin: 8px 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.driver-delivery-card p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.driver-start-button {
+  width: 100%;
+  margin-top: 15px;
+  min-height: 54px;
+  border: 0;
+  border-radius: 12px;
+  background: #078653;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.driver-start-button strong {
+  font-size: 20px;
+}
+
+.driver-home-info {
+  margin-top: 32px;
+}
+
+.driver-home-info > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #8392a3;
+}
+
+.driver-home-info > div {
+  margin-top: 10px;
+  border-top: 1px solid #20344e;
+}
+
+.driver-home-info p {
+  margin: 0;
+  padding: 13px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #20344e;
+}
+
+.driver-home-info small {
+  color: #9ca3af;
+}
+
+.driver-home-info strong {
+  font-size: 12px;
+  text-align: right;
+}

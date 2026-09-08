@@ -12,6 +12,9 @@ const ADMIN_PASSWORD = "admin123";
 const GUARD_USERNAME = "security";
 const GUARD_PASSWORD = "security123";
 
+const DRIVER_USERNAME = "driver";
+const DRIVER_PASSWORD = "driver123";
+
 export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -50,6 +53,12 @@ export default function Login() {
       if (enteredUsername === GUARD_USERNAME && enteredPassword === GUARD_PASSWORD) {
         storage.setItem("gate_guard", JSON.stringify({ username: enteredUsername, role: "security" }));
         navigate("/gate/dashboard", { replace: true });
+        return;
+      }
+
+      if (enteredUsername === DRIVER_USERNAME && enteredPassword === DRIVER_PASSWORD) {
+        storage.setItem("driver_user", JSON.stringify({ username: enteredUsername, role: "driver" }));
+        navigate("/driver/dashboard", { replace: true });
         return;
       }
 
@@ -125,7 +134,7 @@ export default function Login() {
         </form>
 
         <p className="login-hint">
-          Admin demo: admin / admin123 &nbsp;·&nbsp; Guard demo: security / security123
+          Admin: admin / admin123 &nbsp;·&nbsp; Guard: security / security123 &nbsp;·&nbsp; Driver: driver / driver123
         </p>
       </div>
     </div>

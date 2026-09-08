@@ -1,0 +1,104 @@
+.driver-complete {
+  min-height: calc(100vh - 34px);
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.driver-complete-content {
+  width: 100%;
+  text-align: center;
+}
+
+.driver-success-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  background: #078653;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.driver-complete-content > small {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+}
+
+.driver-complete-content h1 {
+  margin: 15px 0 10px;
+  font-size: 30px;
+  line-height: 1.15;
+  color: #111827;
+}
+
+.driver-complete-content > p {
+  margin: 0 auto 25px;
+  max-width: 310px;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.driver-next-card {
+  padding: 18px;
+  border-radius: 14px;
+  background: #effaf4;
+  text-align: left;
+}
+
+.driver-next-card strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.driver-next-card span {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.driver-registration-number {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.driver-registration-number small {
+  display: block;
+  margin-bottom: 5px;
+  color: #9ca3af;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.driver-registration-number strong {
+  font-size: 12px;
+}
+
+.driver-complete-button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #078653;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}

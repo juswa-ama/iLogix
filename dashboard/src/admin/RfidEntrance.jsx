@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  TextField,
-  InputAdornment,
-  MenuItem,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Avatar,
-  Pagination,
-} from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import TopBar from "./TopBar";
-import StatCard from "./StatCard";
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    InputAdornment,
+    MenuItem,
+    Pagination,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import "./RfidEntrance.css";
 import StatusChip from "./StatusChip";
 import "./styles/shared.css";
-import "./RfidEntrance.css";
+import TopBar from "./TopBar";
 
 // TODO: point this at your real API base URL (e.g. via an env var)
 const API_BASE = "/api";
@@ -92,7 +90,7 @@ export default function RfidEntrance() {
             input: {
                 startAdornment: (
                 <InputAdornment position="start">
-                    <SearchOutlinedIcon fontSize="small" sx={{ color: "#9ca3af" }} />
+                    <span aria-hidden="true" style={{ color: "#9ca3af", fontSize: 16 }}>⌕</span>
                 </InputAdornment>
                 ),
             },

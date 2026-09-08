@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Avatar,
-  Button,
-  Chip,
-} from "@mui/material";
-import RefreshOutlinedIcon from "@mui/icons-material/RefreshOutlined";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
-import TopBar from "./TopBar";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    Chip,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import "./Dashboard.css";
 import StatCard from "./StatCard";
 import StatusChip from "./StatusChip";
 import "./styles/shared.css";
-import "./Dashboard.css";
+import TopBar from "./TopBar";
 
 // TODO: point this at your real API base URL (e.g. via an env var)
 const API_BASE = "/api";
@@ -191,7 +191,7 @@ export default function Dashboard() {
             <Box className="panel-header-actions">
               <Button
                 size="small"
-                startIcon={<RefreshOutlinedIcon fontSize="small" />}
+                startIcon={<RefreshIcon fontSize="small" />}
                 className="btn-ghost-sm"
                 onClick={loadDashboard}
                 disabled={loading}
@@ -214,7 +214,7 @@ export default function Dashboard() {
             <Box className="panel-header-actions">
               <Button
                 size="small"
-                startIcon={<RefreshOutlinedIcon fontSize="small" />}
+                startIcon={<RefreshIcon fontSize="small" />}
                 className="btn-ghost-sm"
                 onClick={loadDashboard}
                 disabled={loading}

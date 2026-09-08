@@ -1,0 +1,108 @@
+.driver-info {
+  min-height: calc(100vh - 34px);
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.driver-info-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.driver-back-button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.driver-info-header span {
+  flex: 1;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.driver-info-header strong {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.driver-info-progress {
+  height: 5px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.driver-info-progress i {
+  display: block;
+  width: 25%;
+  height: 100%;
+  background: #111827;
+}
+
+.driver-info-title h1 {
+  margin: 0 0 5px;
+  font-size: 28px;
+}
+
+.driver-info-title p {
+  margin: 0 0 28px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.driver-info-field {
+  margin-bottom: 17px;
+}
+
+.driver-info-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.driver-info-field label b {
+  color: #ef4444;
+}
+
+.driver-info-field > div {
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 14px;
+  border: 1px solid #cde9dc;
+  border-radius: 10px;
+  background: #effaf4;
+  font-size: 14px;
+}
+
+.driver-info-field > div span {
+  float: right;
+  color: #6b7280;
+}
+
+.driver-info-continue {
+  width: 100%;
+  margin-top: 15px;
+  min-height: 52px;
+  border: 0;
+  border-radius: 12px;
+  background: #078653;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}

@@ -1,21 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  Box, Card, TextField, InputAdornment, MenuItem, Button,
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Avatar, IconButton, Pagination,
-} from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BlockOutlinedIcon from "@mui/icons-material/BlockOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import TopBar from "./TopBar";
-import StatCard from "./StatCard";
-import StatusChip from "./StatusChip";
-import RegisterDriverDialog from "./RegisterDriverDialog";
-import "./styles/shared.css";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    IconButton,
+    InputAdornment, MenuItem,
+    Pagination,
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+    TextField,
+} from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
 import "./DriverManagement.css";
+import RegisterDriverDialog from "./RegisterDriverDialog";
+import StatusChip from "./StatusChip";
+import "./styles/shared.css";
+import TopBar from "./TopBar";
 
 const API_BASE = "/api";
 
@@ -115,7 +119,7 @@ export default function DriverManagement() {
               input: {
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchOutlinedIcon fontSize="small" sx={{ color: "#9ca3af" }} />
+                    <span aria-hidden="true" style={{ color: "#9ca3af", fontSize: 16 }}>⌕</span>
                   </InputAdornment>
                 ),
               },

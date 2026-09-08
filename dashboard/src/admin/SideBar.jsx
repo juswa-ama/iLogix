@@ -1,19 +1,19 @@
-import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Button } from "@mui/material";
-import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import NfcOutlinedIcon from "@mui/icons-material/NfcOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import NfcOutlinedIcon from "@mui/icons-material/NfcOutlined";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import { Box, Button, Drawer, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 // Adjust this import path to wherever NVATlogo.png actually lives relative to this file
 import nvatLogo from "./NVATlogo.png";
-import "./styles/shared.css";
 import "./SideBar.css";
+import "./styles/shared.css";
 
 export const SIDEBAR_WIDTH = 260;
 
 const NAV_ITEMS = [
-  { key: "dashboard", label: "Dashboard", icon: SpaceDashboardOutlinedIcon },
+  { key: "dashboard", label: "Dashboard", icon: DashboardOutlinedIcon },
   { key: "drivers", label: "Driver Management", icon: PeopleAltOutlinedIcon },
   { key: "deliveries", label: "Inbound Deliveries", icon: LocalShippingOutlinedIcon },
   { key: "rfid", label: "RFID Entrance", icon: NfcOutlinedIcon },
