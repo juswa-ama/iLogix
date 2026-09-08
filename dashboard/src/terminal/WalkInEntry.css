@@ -1,0 +1,214 @@
+.walkin-screen {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.walkin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.walkin-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.walkin-subtitle {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 2px 0 0;
+}
+
+.walkin-unregistered-chip {
+  background-color: #fef3c7;
+  color: #b45309;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 12px;
+  white-space: nowrap;
+}
+
+.walkin-section-label {
+  font-size: 0.68rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.walkin-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.walkin-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.walkin-field-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.walkin-cargo-box {
+  background-color: #f0fdf4;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.walkin-produce-line {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.7fr auto;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.walkin-remove-line-btn {
+  border: none;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.walkin-add-line-btn {
+  width: 100%;
+  border: 1px dashed #86efac;
+  background-color: transparent;
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 0;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.walkin-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #bbf7d0;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.walkin-total-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #166534;
+}
+
+.walkin-total-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.walkin-id-capture {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: auto;
+}
+
+.walkin-id-capture-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.walkin-id-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.walkin-id-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.walkin-id-subtitle {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin: 2px 0 0;
+}
+
+.walkin-capture-btn {
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #374151;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.walkin-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.walkin-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 14px 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.walkin-btn.save {
+  background-color: #14532d;
+}
+
+.walkin-btn.save:hover {
+  background-color: #166534;
+}
+
+.walkin-btn.cancel {
+  background-color: #dc2626;
+}
+
+.walkin-btn.cancel:hover {
+  background-color: #b91c1c;
+}
