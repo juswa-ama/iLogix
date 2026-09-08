@@ -14,6 +14,8 @@ const GUARD_PASSWORD = "security123";
 
 const DRIVER_USERNAME = "driver";
 const DRIVER_PASSWORD = "driver123";
+const SUPERADMIN_USERNAME = "superadmin";
+const SUPERADMIN_PASSWORD = "superadmin123";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -59,6 +61,12 @@ export default function Login() {
       if (enteredUsername === DRIVER_USERNAME && enteredPassword === DRIVER_PASSWORD) {
         storage.setItem("driver_user", JSON.stringify({ username: enteredUsername, role: "driver" }));
         navigate("/driver/dashboard", { replace: true });
+        return;
+      }
+
+      if (enteredUsername === SUPERADMIN_USERNAME && enteredPassword === SUPERADMIN_PASSWORD) {
+        storage.setItem("super_admin", JSON.stringify({ username: enteredUsername, role: "superadmin" }));
+        navigate("/superadmin/dashboard", { replace: true });
         return;
       }
 
@@ -134,7 +142,7 @@ export default function Login() {
         </form>
 
         <p className="login-hint">
-          Admin: admin / admin123 &nbsp;·&nbsp; Guard: security / security123 &nbsp;·&nbsp; Driver: driver / driver123
+          Super Admin: superadmin / superadmin123 &nbsp;·&nbsp; Admin: admin / admin123 &nbsp;·&nbsp; Guard: security / security123 &nbsp;·&nbsp; Driver: driver / driver123
         </p>
       </div>
     </div>

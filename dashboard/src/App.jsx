@@ -10,6 +10,7 @@ import Sidebar, { SIDEBAR_WIDTH } from "./admin/SideBar";
 import DriverApp from "./driver/DriverApp";
 import Login from "./login/login";
 import GateApp from "./terminal/GateApp";
+import SuperAdmin from "./superAdmin/superAdmin";
 
 const ADMIN_PAGES = {
   dashboard: Dashboard,
@@ -26,6 +27,32 @@ function loadAdminFromSession() {
   } catch {
     return null;
   }
+}
+
+function loadSuperAdminFromSession() {
+  try {
+    const raw = localStorage.getItem("super_admin") ?? sessionStorage.getItem("super_admin");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function SuperAdminArea() {
+  const [superAdmin] = useState(loadSuperAdminFromSession);
+  const navigate = useNavigate();
+
+  if (!superAdmin) {
+    return <Navigate to="/" replace />;
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("super_admin");
+    sessionStorage.removeItem("super_admin");
+    navigate("/", { replace: true });
+  }
+
+  return <SuperAdmin user={superAdmin} onLogout={handleLogout} />;
 }
 
 // Everything under /admin/* — protected by the session set at login,
@@ -65,6 +92,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/admin/*" element={<AdminArea />} />
+      <Route path="/superadmin/*" element={<SuperAdminArea />} />
       <Route path="/gate/*" element={<GateApp />} />
       <Route path="/driver/*" element={<DriverApp />} />
       <Route path="*" element={<Navigate to="/" replace />} />
