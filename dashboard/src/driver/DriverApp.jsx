@@ -5,7 +5,6 @@ import "./Driver.css";
 import DriverAdd from "./DriverAdd";
 import DriverComplete from "./DriverComplete";
 import DriverHome from "./DriverHome";
-import DriverInfo from "./DriverInfo";
 import DriverSummary from "./DriverSummary";
 
 const initialDriver = {
@@ -16,19 +15,23 @@ const initialDriver = {
   origin: "Bambang, Nueva Vizcaya",
 };
 
-const initialFarmers = [
-  { name: "Maria Santos", commodities: [{ name: "Cabbage (Repolyo)", weight: "350 kg" }] },
+const initialCommodities = [
+  { name: "Cabbage (Repolyo)", weight: "350 kg" },
 ];
+
+const initialFarmerCount = 3;
 
 export default function DriverApp() {
   const [screen, setScreen] = useState("home");
   const [driver, setDriver] = useState(initialDriver);
-  const [farmers, setFarmers] = useState(initialFarmers);
+  const [commodities, setCommodities] = useState(initialCommodities);
+  const [farmerCount, setFarmerCount] = useState(initialFarmerCount);
   const navigate = useNavigate();
 
   function resetRegistration() {
     setDriver(initialDriver);
-    setFarmers(initialFarmers);
+    setCommodities(initialCommodities);
+    setFarmerCount(initialFarmerCount);
     setScreen("home");
   }
 
@@ -51,22 +54,19 @@ export default function DriverApp() {
             {screen === "home" && (
               <DriverHome
                 driver={driver}
-                onBack={() => navigate(-1)}
-                onStart={() => setScreen("info")}
+                onStart={() => setScreen("add")}
                 onLogout={handleLogout}
               />
-            )}
-
-            {screen === "info" && (
-              <DriverInfo driver={driver} onBack={() => setScreen("home")} onContinue={() => setScreen("add")} />
             )}
 
             {screen === "add" && (
               <DriverAdd
                 driver={driver}
-                farmers={farmers}
-                setFarmers={setFarmers}
-                onBack={() => setScreen("info")}
+                commodities={commodities}
+                setCommodities={setCommodities}
+                farmerCount={farmerCount}
+                setFarmerCount={setFarmerCount}
+                onBack={() => setScreen("home")}
                 onContinue={() => setScreen("summary")}
               />
             )}
@@ -74,7 +74,8 @@ export default function DriverApp() {
             {screen === "summary" && (
               <DriverSummary
                 driver={driver}
-                farmers={farmers}
+                commodities={commodities}
+                farmerCount={farmerCount}
                 onBack={() => setScreen("add")}
                 onFinish={() => setScreen("complete")}
               />

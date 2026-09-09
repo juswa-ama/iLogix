@@ -1,36 +1,32 @@
 import "./DriverSummary.css";
 
-export default function DriverSummary({ driver, farmers, onBack, onFinish }) {
-  function getCommodities(farmer) {
-    return farmer.commodities || [{ name: farmer.commodity, weight: farmer.weight }];
-  }
-
-  const total = farmers.reduce((sum, farmer) => {
-    return sum + getCommodities(farmer).reduce(
-      (farmerTotal, commodity) => farmerTotal + (Number.parseInt(commodity.weight, 10) || 0),
-      0
-    );
-  }, 0);
+export default function DriverSummary({ driver, commodities, farmerCount, onBack, onFinish }) {
+  const totalWeight = commodities.reduce(
+    (sum, commodity) => sum + (Number.parseInt(commodity.weight, 10) || 0),
+    0
+  );
 
   return (
-    <div className="driver-summary-screen">
-      <div className="driver-summary-header">
-        <button onClick={onBack} className="driver-summary-back">←</button>
-        <span>STEP 3 OF 4</span>
-        <strong>75%</strong>
+    <div className="driver-screen-page">
+      <div className="driver-step-header">
+        <button onClick={onBack} aria-label="Go back">←</button>
+        <span>Step 2 of 3</span>
+        <strong>66%</strong>
       </div>
 
-      <div className="driver-summary-progress">
-        <i />
+      <div className="driver-step-progress">
+        <i style={{ width: "66%" }} />
       </div>
 
-      <div className="driver-summary-title">
-        <h1>Review summary</h1>
-        <p>Please check your details</p>
+      <div className="driver-step-title">
+        <h1>Review summary <span className="driver-tl">(Detalye)</span></h1>
+        <p>Please check your details <span className="driver-tl">(Pakisuri ang mga detalye)</span></p>
       </div>
 
       <div className="driver-summary-card">
-        <small>VEHICLE & DRIVER</small>
+        <small>
+          Vehicle & driver <span className="driver-tl">(Sasakyan at drayber)</span>
+        </small>
         <div>
           <span>Driver</span>
           <strong>{driver.name}</strong>
@@ -48,41 +44,52 @@ export default function DriverSummary({ driver, farmers, onBack, onFinish }) {
           <strong>{driver.plate}</strong>
         </div>
         <div>
-          <span>Origin</span>
+          <span>
+            Origin <span className="driver-tl">(Pinagmulan)</span>
+          </span>
           <strong>{driver.origin}</strong>
         </div>
       </div>
 
       <div className="driver-summary-card">
-        <small>FARMERS & COMMODITIES</small>
-        {farmers.map((farmer, farmerIndex) =>
-          getCommodities(farmer).map((commodity, commodityIndex) => (
-            <div
-              className="driver-summary-farmer"
-              key={`${farmer.name}-${farmerIndex}-${commodity.name}-${commodityIndex}`}
-            >
-              <span>
-                {farmer.name}
-                <em>{commodity.name}</em>
+        <small>
+          Commodities <span className="driver-tl">(Mga produkto)</span>
+        </small>
+        {commodities.map((commodity, index) => (
+          <div className="driver-summary-commodity" key={`${commodity.name}-${index}`}>
+            <div className="driver-summary-commodity-info">
+              <span className="driver-summary-commodity-name">{commodity.name}</span>
+              <span className="driver-summary-commodity-meta">
+                {farmerCount} farmer{farmerCount === 1 ? "" : "s"}
               </span>
-              <strong>{commodity.weight}</strong>
             </div>
-          ))
-        )}
+            <strong>{commodity.weight}</strong>
+          </div>
+        ))}
       </div>
 
-      <div className="driver-summary-total">
-        <span>Total cargo weight</span>
-        <strong>{total} kg</strong>
+      <div className="driver-summary-totals">
+        <div className="driver-summary-total">
+          <span>
+            Total farmers <span className="driver-tl">(Kabuuang magsasaka)</span>
+          </span>
+          <strong>{farmerCount}</strong>
+        </div>
+        <div className="driver-summary-total">
+          <span>
+            Total cargo weight <span className="driver-tl">(Kabuuang timbang)</span>
+          </span>
+          <strong>{totalWeight} kg</strong>
+        </div>
       </div>
 
-      <div className="driver-summary-actions">
+      <div className="driver-actions">
         <button type="button" className="driver-button secondary" onClick={onBack}>
           Back
         </button>
-        <button className="driver-summary-finish" onClick={onFinish}>
+        <button className="driver-button primary" onClick={onFinish}>
           Finish registration
-          <span>✓</span>
+          <span aria-hidden="true">✓</span>
         </button>
       </div>
     </div>

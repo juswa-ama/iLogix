@@ -1,6 +1,6 @@
 import "./DriverHome.css";
 
-export default function DriverHome({ driver, onBack, onStart, onLogout }) {
+export default function DriverHome({ driver, onStart, onLogout }) {
   const initials = driver.name
     .split(" ")
     .map((word) => word[0])
@@ -8,57 +8,75 @@ export default function DriverHome({ driver, onBack, onStart, onLogout }) {
     .slice(0, 2);
 
   return (
-    <div className="driver-home">
+    <div className="driver-screen-page">
       <div className="driver-home-header">
-        <button type="button" className="driver-home-back" onClick={onBack}>←</button>
-
         <div className="driver-home-title">
           <small>Good morning</small>
           <h1>{driver.name}</h1>
         </div>
-
-        <div className="driver-home-account">
-          <div className="driver-avatar">{initials}</div>
-          <button type="button" className="driver-logout-button" onClick={onLogout}>
-            Log out
-          </button>
-        </div>
+        <div className="driver-avatar">{initials}</div>
       </div>
 
       <div className="driver-home-content">
         <div className="driver-delivery-card">
-          <div className="driver-truck-icon">🚚</div>
-          <div>
-            <span>TODAY'S DELIVERY</span>
-            <h2>Register today's delivery</h2>
-            <p>
-              Complete your delivery registration before entering NVAT for fast-track automatic RFID clearance.
-            </p>
-          </div>
+          <div className="driver-delivery-badge">🚚</div>
+          <span className="driver-delivery-eyebrow">
+            Today's delivery <span className="driver-tl">(Paghahatid ngayon)</span>
+          </span>
+          <h2>Register today's delivery</h2>
+          <p>
+            Complete your delivery registration before entering NVAT for fast-track automatic RFID clearance.
+          </p>
         </div>
 
         <button className="driver-start-button" onClick={onStart}>
-          <span>Start registration</span>
+          <span>
+            Start registration <span className="driver-tl-light">(Simulan ang pagpaparehistro)</span>
+          </span>
           <strong>→</strong>
         </button>
 
         <div className="driver-home-info">
-          <span>DRIVER INFORMATION</span>
+          <span>
+            Driver information <span className="driver-tl">(Impormasyon ng drayber)</span>
+          </span>
           <div>
             <p>
-              <small>Vehicle</small>
+              <small>Driver</small>
+              <strong>{driver.name}</strong>
+            </p>
+            <p>
+              <small>Mobile</small>
+              <strong>{driver.phone}</strong>
+            </p>
+            <p>
+              <small>
+                Vehicle <span className="driver-tl">(Sasakyan)</span>
+              </small>
               <strong>{driver.vehicle}</strong>
             </p>
             <p>
               <small>Plate number</small>
-              <strong>{driver.plate}</strong>
+              <strong className="driver-plate">{driver.plate}</strong>
             </p>
             <p>
-              <small>Origin</small>
+              <small>
+                Origin <span className="driver-tl">(Pinagmulan)</span>
+              </small>
               <strong>{driver.origin}</strong>
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="driver-actions">
+        <button
+          type="button"
+          className="driver-button secondary driver-logout-button"
+          onClick={onLogout}
+        >
+          Log out
+        </button>
       </div>
     </div>
   );
