@@ -1,4 +1,5 @@
 import "./DriverHome.css";
+import nvatLogo from "../admin/NVATlogo.png";
 
 export default function DriverHome({ driver, onStart, onLogout }) {
   const initials = driver.name
@@ -19,7 +20,9 @@ export default function DriverHome({ driver, onStart, onLogout }) {
 
       <div className="driver-home-content">
         <div className="driver-delivery-card">
-          <div className="driver-delivery-badge">🚚</div>
+          <div className="driver-delivery-badge">
+            <img src={nvatLogo} alt="NVAT logo" />
+          </div>
           <span className="driver-delivery-eyebrow">
             Today's delivery <span className="driver-tl">(Paghahatid ngayon)</span>
           </span>

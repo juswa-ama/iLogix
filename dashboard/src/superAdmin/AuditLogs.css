@@ -1,0 +1,221 @@
+/* Assumes ../admin/styles/shared.css and superAdmin.css are already loaded
+   (via superSidebar.jsx / SuperAdmin.jsx) for --color-* tokens and the
+   .super-admin-header / .super-admin-stats / .stat-card / .pagination /
+   .export-action / .employee-panel-footer / .no-results classes reused below. */
+
+.danger-text {
+  color: #dc2626 !important;
+}
+
+.info-text {
+  color: #1d4ed8 !important;
+}
+
+.audit-panel {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border, #edeff2);
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+
+.audit-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.audit-panel-heading h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-dark, #111827);
+  margin: 0;
+}
+
+.audit-panel-heading p {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #9ca3af);
+  margin: 2px 0 0;
+}
+
+.audit-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.audit-search {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--color-input-border, #e5e7eb);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--color-text-muted, #9ca3af);
+}
+
+.audit-search input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--color-text-dark, #111827);
+}
+
+.audit-filters select {
+  border: 1px solid var(--color-input-border, #e5e7eb);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  color: var(--color-text-body, #374151);
+  background-color: #ffffff;
+}
+
+.audit-table-wrap {
+  min-height: 150px;
+  overflow-x: auto;
+}
+
+.audit-panel .export-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.audit-table thead th {
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-text-muted, #9ca3af);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border, #edeff2);
+}
+
+.audit-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.82rem;
+  vertical-align: middle;
+}
+
+.audit-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audit-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.audit-user-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-dark, #111827);
+  margin: 0;
+}
+
+.audit-user-id {
+  font-size: 0.68rem;
+  color: var(--color-text-muted, #9ca3af);
+  margin: 0;
+}
+
+.audit-action-cell {
+  color: var(--color-text-body, #374151);
+}
+
+.audit-muted-cell {
+  color: var(--color-text-secondary, #6b7280);
+  white-space: nowrap;
+}
+
+/* Role chips */
+.role-chip {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.role-chip.super-admin {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.role-chip.admin {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.role-chip.security-guard {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.role-chip.it-support {
+  background-color: #ede9fe;
+  color: #6d28d9;
+}
+
+/* Status chips */
+.status-chip {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.status-chip.success {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-chip.failed {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.status-chip.flagged {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.view-action {
+  background-color: var(--color-primary, #14532d);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.view-action:hover {
+  background-color: var(--color-primary-hover, #166534);
+}

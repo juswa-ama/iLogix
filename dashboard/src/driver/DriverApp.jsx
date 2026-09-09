@@ -62,6 +62,7 @@ export default function DriverApp() {
             {screen === "add" && (
               <DriverAdd
                 driver={driver}
+                setDriver={setDriver}
                 commodities={commodities}
                 setCommodities={setCommodities}
                 farmerCount={farmerCount}

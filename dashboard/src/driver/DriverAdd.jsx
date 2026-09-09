@@ -1,6 +1,39 @@
 import "./DriverAdd.css";
 
-export default function DriverAdd({ driver, commodities, setCommodities, farmerCount, setFarmerCount, onBack, onContinue }) {
+const commodityOptions = [
+  "Cabbage (Repolyo)",
+  "Carrots (Karot)",
+  "Potatoes (Patatas)",
+  "Tomatoes (Kamatis)",
+  "Eggplant (Talong)",
+  "Green beans (Sitaw)",
+  "Corn (Mais)",
+  "Squash (Kalabasa)",
+  "Onions (Sibuyas)",
+  "Garlic (Bawang)",
+  "Chili peppers (Siling labuyo)",
+  "Spinach (Kangkong)",
+  "Lettuce (Letsugas)",
+  "Cucumber (Pipino)",
+  "Bell peppers (Siling pangsabaw)",
+  "Radish (Labanos)",
+  "Sweet potatoes (Kamote)",
+  "Bitter melon (Ampalaya)",
+  "Okra (Okra)",
+];
+
+const originOptions = [
+  "Bambang, Nueva Vizcaya",
+  "Bayombong, Nueva Vizcaya",
+  "Kayapa, Nueva Vizcaya",
+  "Aritao, Nueva Vizcaya",
+  "Kasibu, Nueva Vizcaya",
+  "Tuba, Benguet",
+  "Atok, Benguet",
+  "La Trinidad, Benguet",
+];
+
+export default function DriverAdd({ driver, setDriver, commodities, setCommodities, farmerCount, setFarmerCount, onBack, onContinue }) {
   function addCommodity() {
     setCommodities((current) => [
       ...current,
@@ -17,6 +50,18 @@ export default function DriverAdd({ driver, commodities, setCommodities, farmerC
 
   function changeFarmerCount(delta) {
     setFarmerCount((current) => Math.max(1, (Number(current) || 0) + delta));
+  }
+
+  function changeCommodity(index, name) {
+    setCommodities((current) =>
+      current.map((commodity, itemIndex) =>
+        itemIndex === index ? { ...commodity, name } : commodity,
+      ),
+    );
+  }
+
+  function changeOrigin(origin) {
+    setDriver((current) => ({ ...current, origin }));
   }
 
   return (
@@ -40,7 +85,17 @@ export default function DriverAdd({ driver, commodities, setCommodities, farmerC
         <label>
           Cargo origin <span className="driver-tl">(Pinagmulan ng dala)</span>
         </label>
-        <div className="driver-value">{driver.origin}</div>
+        <select
+          className="driver-value driver-select"
+          value={driver.origin}
+          onChange={(event) => changeOrigin(event.target.value)}
+        >
+          {originOptions.map((origin) => (
+            <option key={origin} value={origin}>
+              {origin}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="driver-section">
@@ -87,10 +142,17 @@ export default function DriverAdd({ driver, commodities, setCommodities, farmerC
             <label>
               Commodity <span className="driver-tl">(Uri ng produkto)</span>
             </label>
-            <div className="driver-value select">
-              {commodity.name}
-              <span aria-hidden="true">⌄</span>
-            </div>
+            <select
+              className="driver-value driver-select"
+              value={commodity.name}
+              onChange={(event) => changeCommodity(index, event.target.value)}
+            >
+              {commodityOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="driver-field">

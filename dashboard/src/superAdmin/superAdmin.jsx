@@ -10,6 +10,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import SuperAdminSideBar, { SUPER_SIDEBAR_WIDTH } from "./superSidebar";
 import "./superAdmin.css";
+import AuditLogs from "./AuditLogs";
+import Settings from "./Settings";
 
 // Maps the sidebar's nav keys to what gets rendered in the content area.
 // Add a real component per key as those pages get built out.
@@ -106,11 +108,15 @@ export default function SuperAdmin({ user, onLogout }) {
 							</div>
 						</section>
 					</>
-				) : (
+					) : activeKey === "audit" ? (
+					<AuditLogs user={user} onLogout={onLogout} />
+					) : activeKey === "settings" ? (
+					<Settings user={user} />
+					) : (
 					<header className="super-admin-header">
 						<div><h1>{activeLabel}</h1><p>This section hasn't been built yet.</p></div>
 					</header>
-				)}
+					)}
 			</Box>
 		</Box>
 	);
