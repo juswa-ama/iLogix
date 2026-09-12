@@ -6,6 +6,7 @@
   border: none !important;
   display: flex;
   justify-content: space-between;
+  overflow-x: hidden;
 }
 
 .sidebar-brand {
@@ -85,4 +86,48 @@
 
 .sidebar-logout-btn:hover {
   background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+@media (max-width: 640px) {
+  .sidebar-paper {
+    width: 72px;
+  }
+
+  .sidebar-brand {
+    justify-content: center;
+    padding: 20px 12px;
+  }
+
+  .sidebar-brand > div:last-child,
+  .sidebar-nav-label,
+  .sidebar-logout-btn .MuiButton-startIcon + span {
+    display: none;
+  }
+
+  .sidebar-nav {
+    padding: 0 10px;
+  }
+
+  .sidebar-nav-item {
+    justify-content: center;
+    min-height: 44px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .sidebar-nav-icon {
+    justify-content: center;
+    min-width: 0 !important;
+  }
+
+  .sidebar-footer {
+    padding: 12px 10px;
+  }
+
+  .sidebar-logout-btn {
+    justify-content: center !important;
+    min-width: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }

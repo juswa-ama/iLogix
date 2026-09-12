@@ -28,7 +28,8 @@ body {
 
 .app-main {
   flex-grow: 1;
-  padding: 32px;
+  min-width: 0;
+  padding: 28px 32px 40px;
 }
 
 /* Generic white panel card */
@@ -37,6 +38,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: 14px;
   box-shadow: none;
+  min-width: 0;
   padding: 20px;
 }
 
@@ -175,9 +177,63 @@ body {
   margin-bottom: 16px;
 }
 
+.filter-row > :first-child {
+  min-width: 0;
+}
+
+.MuiTableContainer-root {
+  overflow-x: auto;
+}
+
 .empty-state-text {
   padding: 24px 8px;
   text-align: center;
   color: #6b7280;
   font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .app-main {
+    padding: 24px 20px 32px;
+  }
+
+  .panel-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-main {
+    margin-left: 0 !important;
+    padding: 20px 14px 28px;
+  }
+
+  .topbar-title {
+    font-size: 1.2rem;
+  }
+
+  .topbar-subtitle {
+    max-width: 34rem;
+  }
+
+  .panel-header {
+    align-items: stretch;
+  }
+
+  .panel-header > .MuiButton-root {
+    align-self: flex-start;
+  }
+
+  .filter-row {
+    flex-direction: column;
+  }
+
+  .filter-row .MuiTextField-root {
+    width: 100%;
+  }
+
+  .table-footer-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

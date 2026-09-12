@@ -4,15 +4,15 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import {
-    Avatar,
-    Box,
-    Button,
-    Card,
-    IconButton,
-    InputAdornment, MenuItem,
-    Pagination,
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    TextField,
+  Avatar,
+  Box,
+  Button,
+  Card,
+  IconButton,
+  InputAdornment, MenuItem,
+  Pagination,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  TextField,
 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import "./DriverManagement.css";
@@ -22,6 +22,69 @@ import "./styles/shared.css";
 import TopBar from "./TopBar";
 
 const API_BASE = "/api";
+
+const SAMPLE_DRIVERS = [
+  {
+    id: "DRV-1001",
+    name: "Pedro Santos",
+    plate: "CAV 8821",
+    contact: "0917 123 4567",
+    rfid: "Verified",
+    status: "Active",
+    color: "#14532d",
+    initials: "PS",
+  },
+  {
+    id: "DRV-1002",
+    name: "Maria Santos",
+    plate: "NVA 4821",
+    contact: "0918 234 5678",
+    rfid: "Verified",
+    status: "Active",
+    color: "#2563eb",
+    initials: "MS",
+  },
+  {
+    id: "DRV-1003",
+    name: "Joel Ramirez",
+    plate: "KDA 7710",
+    contact: "0919 345 6789",
+    rfid: "Verified",
+    status: "Active",
+    color: "#0f766e",
+    initials: "JR",
+  },
+  {
+    id: "DRV-1004",
+    name: "Lina Cruz",
+    plate: "BMB 1934",
+    contact: "0920 456 7890",
+    rfid: "Pending",
+    status: "Active",
+    color: "#b45309",
+    initials: "LC",
+  },
+  {
+    id: "DRV-1005",
+    name: "Pedro Garcia",
+    plate: "KAS 9082",
+    contact: "0921 567 8901",
+    rfid: "Pending",
+    status: "Inactive",
+    color: "#7c3aed",
+    initials: "PG",
+  },
+  {
+    id: "DRV-1006",
+    name: "Ana Villanueva",
+    plate: "BMB 6645",
+    contact: "0922 678 9012",
+    rfid: "Verified",
+    status: "Active",
+    color: "#be123c",
+    initials: "AV",
+  },
+];
 
 export default function DriverManagement() {
   const [drivers, setDrivers] = useState([]);
@@ -43,8 +106,8 @@ export default function DriverManagement() {
         if (!cancelled) setDrivers(Array.isArray(json) ? json : json.drivers || []);
       } catch (err) {
         if (!cancelled) {
-          setError("Unable to load drivers. Showing no data until the server responds.");
-          setDrivers([]);
+          setError("Unable to load drivers. Showing sample data until the server responds.");
+          setDrivers(SAMPLE_DRIVERS);
         }
       } finally {
         if (!cancelled) setLoading(false);

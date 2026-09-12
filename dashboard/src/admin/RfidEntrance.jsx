@@ -1,19 +1,19 @@
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import {
-    Avatar,
-    Box,
-    Button,
-    Card,
-    InputAdornment,
-    MenuItem,
-    Pagination,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    TextField,
+  Avatar,
+  Box,
+  Button,
+  Card,
+  InputAdornment,
+  MenuItem,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./RfidEntrance.css";
@@ -24,8 +24,72 @@ import TopBar from "./TopBar";
 // TODO: point this at your real API base URL (e.g. via an env var)
 const API_BASE = "/api";
 
+const SAMPLE_SCANS = [
+  {
+    id: "RFID-482910",
+    driver: "Pedro Santos",
+    sub: "DRV-1001",
+    plate: "CAV 8821",
+    rfid: "RFID-482910",
+    time: "09:41 AM",
+    farmers: 3,
+    verification: "Verified",
+    color: "#14532d",
+    initials: "PS",
+  },
+  {
+    id: "RFID-193847",
+    driver: "Maria Santos",
+    sub: "DRV-1002",
+    plate: "NVA 4821",
+    rfid: "RFID-193847",
+    time: "09:12 AM",
+    farmers: 2,
+    verification: "Verified",
+    color: "#2563eb",
+    initials: "MS",
+  },
+  {
+    id: "RFID-762310",
+    driver: "Joel Ramirez",
+    sub: "DRV-1003",
+    plate: "KDA 7710",
+    rfid: "RFID-762310",
+    time: "08:58 AM",
+    farmers: 4,
+    verification: "Verified",
+    color: "#0f766e",
+    initials: "JR",
+  },
+  {
+    id: "RFID-000019",
+    driver: "Unknown Vehicle",
+    sub: "—",
+    plate: "UNK 0019",
+    rfid: "RFID-000019",
+    time: "08:44 AM",
+    farmers: 0,
+    verification: "Unregistered",
+    color: "#9ca3af",
+    initials: "?",
+  },
+  {
+    id: "RFID-554821",
+    driver: "Lina Cruz",
+    sub: "DRV-1004",
+    plate: "BMB 1934",
+    rfid: "RFID-554821",
+    time: "08:30 AM",
+    farmers: 1,
+    verification: "Verified",
+    color: "#b45309",
+    initials: "LC",
+  },
+];
+
 export default function RfidEntrance() {
   const [search, setSearch] = useState("");
+  const [verificationFilter, setVerificationFilter] = useState("All Verification");
   const [scans, setScans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -42,8 +106,8 @@ export default function RfidEntrance() {
         if (!cancelled) setScans(Array.isArray(json) ? json : json.scans || []);
       } catch (err) {
         if (!cancelled) {
-          setError("Unable to load RFID scans. Showing no data until the server responds.");
-          setScans([]);
+          setError("Unable to load RFID scans. Showing sample data until the server responds.");
+          setScans(SAMPLE_SCANS);
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -55,12 +119,15 @@ export default function RfidEntrance() {
     };
   }, []);
 
-  const filteredScans = scans.filter(
-    (row) =>
+  const filteredScans = scans.filter((row) => {
+    const matchesSearch =
       row.driver?.toLowerCase().includes(search.toLowerCase()) ||
       row.plate?.toLowerCase().includes(search.toLowerCase()) ||
-      row.rfid?.toLowerCase().includes(search.toLowerCase())
-  );
+      row.rfid?.toLowerCase().includes(search.toLowerCase());
+    const matchesVerification =
+      verificationFilter === "All Verification" || row.verification === verificationFilter;
+    return matchesSearch && matchesVerification;
+  });
 
   return (
     <Box>
@@ -72,7 +139,7 @@ export default function RfidEntrance() {
         <Box className="panel-header">
           <Box>
             <p className="panel-title">Live Gate Scans</p>
-            <p className="panel-subtitle">Automatic detection at Main Terminal Gate 1 & Gate 2</p>
+            <p className="panel-subtitle">Automatic detection at the terminal entrance gate</p>
           </Box>
           <Button size="small" variant="outlined" startIcon={<FileDownloadOutlinedIcon fontSize="small" />} className="btn-outline">
             Export Scans
@@ -96,14 +163,13 @@ export default function RfidEntrance() {
             },
             }}
           />
-          <TextField select size="small" defaultValue="All Gates" sx={{ minWidth: 120 }}>
-            {["All Gates", "Gate 1", "Gate 2"].map((opt) => (
-              <MenuItem key={opt} value={opt}>
-                {opt}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField select size="small" defaultValue="All Verification" sx={{ minWidth: 150 }}>
+          <TextField
+            select
+            size="small"
+            value={verificationFilter}
+            onChange={(e) => setVerificationFilter(e.target.value)}
+            sx={{ minWidth: 150 }}
+          >
             {["All Verification", "Verified", "Unregistered"].map((opt) => (
               <MenuItem key={opt} value={opt}>
                 {opt}
@@ -116,7 +182,7 @@ export default function RfidEntrance() {
 
         {!loading && filteredScans.length === 0 && (
           <p className="empty-state-text">
-            {scans.length === 0 ? "No entrance scans recorded yet." : "No scans match your search."}
+            {scans.length === 0 ? "No entrance scans recorded yet." : "No scans match your filters."}
           </p>
         )}
 
@@ -126,7 +192,7 @@ export default function RfidEntrance() {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    {["Driver Details", "Plate No.", "RFID Tag UID", "Scan Time", "Verification", "Action"].map((h) => (
+                    {["Driver Details", "Plate No.", "RFID Tag UID", "Farmer Count", "Scan Time", "Verification", "Action"].map((h) => (
                       <TableCell key={h} className="data-table-head-cell">
                         {h}
                       </TableCell>
@@ -151,6 +217,7 @@ export default function RfidEntrance() {
                       <TableCell className={`rfid-tag-cell ${row.verification === "Unregistered" ? "flagged" : "normal"}`}>
                         {row.rfid}
                       </TableCell>
+                      <TableCell className="data-table-cell">{row.farmers}</TableCell>
                       <TableCell className="data-table-cell">{row.time}</TableCell>
                       <TableCell className="data-table-cell">
                         <StatusChip label={row.verification} />

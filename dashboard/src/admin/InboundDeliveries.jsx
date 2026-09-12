@@ -1,31 +1,89 @@
-import { useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  TextField,
-  InputAdornment,
-  MenuItem,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Avatar,
-  Pagination,
-} from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import RefreshOutlinedIcon from "@mui/icons-material/RefreshOutlined";
-import TopBar from "./TopBar";
-import StatCard from "./StatCard";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    InputAdornment,
+    MenuItem,
+    Pagination,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import "./InboundDeliveries.css";
 import StatusChip from "./StatusChip";
 import "./styles/shared.css";
-import "./InboundDeliveries.css";
+import TopBar from "./TopBar";
 
 // TODO: point this at your real API base URL (e.g. via an env var)
 const API_BASE = "/api";
+
+const SAMPLE_LIVE_DELIVERIES = [
+  {
+    id: "DLV-1042",
+    driver: "Maria Santos",
+    plate: "NVA 4821",
+    farmers: 3,
+    weight: "1,240 kg",
+    time: "09:12 AM",
+    status: "Verified",
+    color: "#2563eb",
+    initials: "MS",
+  },
+  {
+    id: "DLV-1043",
+    driver: "Joel Ramirez",
+    plate: "KDA 7710",
+    farmers: 2,
+    weight: "860 kg",
+    time: "09:28 AM",
+    status: "Verified",
+    color: "#0f766e",
+    initials: "JR",
+  },
+  {
+    id: "DLV-1044",
+    driver: "Lina Cruz",
+    plate: "BMB 1934",
+    farmers: 4,
+    weight: "1,680 kg",
+    time: "09:41 AM",
+    status: "Waiting",
+    color: "#b45309",
+    initials: "LC",
+  },
+];
+
+const SAMPLE_WALK_INS = [
+  {
+    id: "WALK-201",
+    driver: "Pedro Garcia",
+    plate: "KAS 9082",
+    farmers: 1,
+    weight: "420 kg",
+    status: "Waiting",
+    color: "#7c3aed",
+    initials: "PG",
+  },
+  {
+    id: "WALK-202",
+    driver: "Ana Villanueva",
+    plate: "BMB 6645",
+    farmers: 2,
+    weight: "730 kg",
+    status: "Verified",
+    color: "#be123c",
+    initials: "AV",
+  },
+];
 
 function SectionCard({ title, subtitle, action, children }) {
   return (
@@ -58,11 +116,6 @@ function DeliveryRow({ row, showTime }) {
       <TableCell className="data-table-cell">{row.farmers}</TableCell>
       <TableCell className="data-table-cell">{row.weight}</TableCell>
       {showTime && <TableCell className="data-table-cell">{row.time}</TableCell>}
-      {row.rfid && (
-        <TableCell className="data-table-cell">
-          <StatusChip label={row.rfid} />
-        </TableCell>
-      )}
       <TableCell className="data-table-cell">
         <StatusChip label={row.status} />
       </TableCell>
@@ -77,8 +130,8 @@ function DeliveryRow({ row, showTime }) {
 
 export default function InboundDeliveries() {
   const [search, setSearch] = useState("");
-  const [liveDeliveries, setLiveDeliveries] = useState([]);
-  const [walkIns, setWalkIns] = useState([]);
+  const [liveDeliveries, setLiveDeliveries] = useState(SAMPLE_LIVE_DELIVERIES);
+  const [walkIns, setWalkIns] = useState(SAMPLE_WALK_INS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -95,11 +148,11 @@ export default function InboundDeliveries() {
           setLiveDeliveries(json.liveDeliveries || []);
           setWalkIns(json.walkIns || []);
         }
-      } catch (err) {
+      } catch {
         if (!cancelled) {
-          setError("Unable to load deliveries. Showing no data until the server responds.");
-          setLiveDeliveries([]);
-          setWalkIns([]);
+          setError("Unable to load deliveries. Showing sample inbound data.");
+          setLiveDeliveries(SAMPLE_LIVE_DELIVERIES);
+          setWalkIns(SAMPLE_WALK_INS);
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -151,7 +204,7 @@ export default function InboundDeliveries() {
                 }}
             />
             <TextField select size="small" defaultValue="All Status" sx={{ minWidth: 130 }}>
-              {["All Status", "Waiting", "Completed"].map((opt) => (
+              {["All Status", "Waiting", "Verified"].map((opt) => (
                 <MenuItem key={opt} value={opt}>
                   {opt}
                 </MenuItem>
@@ -180,7 +233,7 @@ export default function InboundDeliveries() {
                 <Table size="small">
                   <TableHead>
                     <TableRow>
-                      {["Driver", "Plate No.", "Farmers", "Total Weight", "Arrival Time", "RFID", "Status", "Action"].map((h) => (
+                      {["Driver", "Plate No.", "Farmer Count", "Total Weight", "Arrival Time", "Status", "Action"].map((h) => (
                         <TableCell key={h} className="data-table-head-cell">
                           {h}
                         </TableCell>
@@ -226,7 +279,7 @@ export default function InboundDeliveries() {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    {["Driver", "Plate No.", "Farmers", "Total Weight", "Status", "Action"].map((h) => (
+                    {["Driver", "Plate No.", "Farmer Count", "Total Weight", "Status", "Action"].map((h) => (
                       <TableCell key={h} className="data-table-head-cell">
                         {h}
                       </TableCell>

@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Dialog, Box, TextField, MenuItem, Button, IconButton } from "@mui/material";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import NfcOutlinedIcon from "@mui/icons-material/NfcOutlined";
-import "./styles/shared.css";
+import { Box, Button, Dialog, IconButton, MenuItem, TextField } from "@mui/material";
+import { useState } from "react";
 import "./RegisterDriverDialog.css";
+import "./styles/shared.css";
 
 const VEHICLE_TYPES = ["6-Wheeler Truck", "10-Wheeler Truck", "Multicab", "Motorcycle", "Van"];
 const GENDERS = ["Male", "Female", "Prefer not to say"];
@@ -25,7 +25,6 @@ const EMPTY_FORM = {
   address: "",
   driverId: "",
   rfidTag: "",
-  commodityOrigin: "",
 };
 
 export default function RegisterDriverDialog({ open, onClose, onSave }) {
@@ -170,7 +169,6 @@ export default function RegisterDriverDialog({ open, onClose, onSave }) {
                 <SummaryItem label="Driver" value={fullName} />
                 <SummaryItem label="Driver ID" value={form.driverId || "—"} />
                 <SummaryItem label="Plate Number" value={form.plateNumber || "—"} />
-                <SummaryItem label="Commodity Origin" value={form.commodityOrigin || "Bambang, Nueva Vizcaya"} />
               </Box>
             </Box>
 
