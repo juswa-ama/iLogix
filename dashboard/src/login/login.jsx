@@ -74,7 +74,8 @@ export default function Login() {
       setLoading(false);
     }, 300);
   }
-
+// MAAAAMAAAAAAAAAAAAAAAAAAA
+// DL mo nga yung rene extension dito AHHAHA
   return (
     <div className="login-page">
       <div className="login-card">

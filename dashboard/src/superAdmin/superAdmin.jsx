@@ -11,6 +11,7 @@ import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import SuperAdminSideBar, { SUPER_SIDEBAR_WIDTH } from "./superSidebar";
 import "./superAdmin.css";
 import AuditLogs from "./AuditLogs";
+import AddEmployee from "./AddEmployee";
 import Settings from "./Settings";
 
 // Maps the sidebar's nav keys to what gets rendered in the content area.
@@ -28,6 +29,7 @@ export default function SuperAdmin({ user, onLogout }) {
 	const [search, setSearch] = useState("");
 	const [roleFilter, setRoleFilter] = useState("All Roles");
 	const [statusFilter, setStatusFilter] = useState("All Status");
+	const [showAddEmployee, setShowAddEmployee] = useState(false);
 
 	const employees = EMPTY_EMPLOYEES;
 
@@ -38,7 +40,13 @@ export default function SuperAdmin({ user, onLogout }) {
 			<SuperAdminSideBar active={activeKey} onNavigate={setActiveKey} onLogout={onLogout} />
 
 			<Box component="main" className="super-admin-content" style={{ marginLeft: SUPER_SIDEBAR_WIDTH }}>
-				{activeKey === "employees" ? (
+				{activeKey === "employees" ? showAddEmployee ? (
+					<AddEmployee
+						user={user}
+						onCancel={() => setShowAddEmployee(false)}
+						onCreate={() => setShowAddEmployee(false)}
+					/>
+				) : (
 					<>
 						<header className="super-admin-header">
 							<div><h1>{activeLabel}</h1><p>Manage NVAT staff accounts, roles, and system access permissions.</p></div>
@@ -60,7 +68,7 @@ export default function SuperAdmin({ user, onLogout }) {
 							<div className="employee-panel-heading">
 								<div><h2>Staff Accounts</h2><p>All employees with system access, sorted by role.</p></div>
 								<div className="employee-panel-actions">
-									<button className="primary-action" type="button" disabled title="Employees can only be added on the server"><AddOutlinedIcon fontSize="inherit" /> Add Employee</button>
+									<button className="primary-action" type="button" onClick={() => setShowAddEmployee(true)}><AddOutlinedIcon fontSize="inherit" /> Add Employee</button>
 									<button className="export-action" type="button" disabled>Export <span>CSV</span></button>
 								</div>
 							</div>
