@@ -1,5 +1,7 @@
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import {
     Avatar,
@@ -23,6 +25,14 @@ import TopBar from "./TopBar";
 
 // TODO: point this at your real API base URL (e.g. via an env var)
 const API_BASE = "/api";
+
+const DATE_RANGE_OPTIONS = [
+  { value: "today", label: "Today" },
+  { value: "yesterday", label: "Yesterday" },
+  { value: "7d", label: "Last 7 Days" },
+  { value: "month", label: "This Month" },
+  { value: "custom", label: "Custom Range" },
+];
 
 // Shape the dashboard expects back from the server:
 // {
@@ -130,11 +140,21 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [dateRange, setDateRange] = useState("today");
+  const [customFrom, setCustomFrom] = useState("");
+  const [customTo, setCustomTo] = useState("");
+
   async function loadDashboard() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${API_BASE}/dashboard`);
+      const params = new URLSearchParams({ range: dateRange });
+      if (dateRange === "custom") {
+        if (customFrom) params.set("from", customFrom);
+        if (customTo) params.set("to", customTo);
+      }
+
+      const res = await fetch(`${API_BASE}/dashboard?${params.toString()}`);
       if (!res.ok) throw new Error(`Server responded with ${res.status}`);
       const json = await res.json();
       setData({ ...EMPTY_DASHBOARD, ...json });
@@ -148,15 +168,72 @@ export default function Dashboard() {
 
   useEffect(() => {
     loadDashboard();
-  }, []);
+    // Custom range re-fetches only when "Apply" is clicked (see button below),
+    // so it's intentionally excluded from this dependency list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateRange]);
 
   const { stats, liveVehicles, walkInDrivers, rfidEntrance, todaysSummary } = data;
+  const activeRangeLabel = DATE_RANGE_OPTIONS.find((opt) => opt.value === dateRange)?.label;
 
   return (
     <Box>
       <TopBar title="Dashboard" subtitle="Nueva Vizcaya Agricultural Terminal" />
 
       {error && <p className="empty-state-text" style={{ color: "#b45309" }}>{error}</p>}
+
+      <Box className="stats-filter-bar">
+        <Box className="stats-filter-left">
+          <CalendarTodayOutlinedIcon className="stats-filter-icon" />
+          <span className="stats-filter-label">Data range</span>
+          <span className="stats-filter-active-pill">{activeRangeLabel}</span>
+        </Box>
+
+        <Box className="stats-filter-right">
+          <Box className="stats-filter-select-wrap">
+            <select
+              className="stats-filter-select"
+              value={dateRange}
+              onChange={(e) => setDateRange(e.target.value)}
+            >
+              {DATE_RANGE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <KeyboardArrowDownOutlinedIcon className="stats-filter-chevron" />
+          </Box>
+
+          {dateRange === "custom" && (
+            <>
+              <Box className="stats-filter-divider" />
+              <input
+                type="date"
+                className="stats-filter-date"
+                value={customFrom}
+                onChange={(e) => setCustomFrom(e.target.value)}
+              />
+              <span className="stats-filter-dash">to</span>
+              <input
+                type="date"
+                className="stats-filter-date"
+                value={customTo}
+                onChange={(e) => setCustomTo(e.target.value)}
+              />
+              <Button
+                size="small"
+                variant="contained"
+                className="btn-solid-sm"
+                onClick={loadDashboard}
+                disabled={loading || !customFrom || !customTo}
+              >
+                Apply
+              </Button>
+            </>
+          )}
+        </Box>
+      </Box>
 
       <Box className="dashboard-stats-grid">
         <StatCard

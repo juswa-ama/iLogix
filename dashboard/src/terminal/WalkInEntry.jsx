@@ -4,14 +4,58 @@ import "./WalkInEntry.css";
 
 const VEHICLE_TYPES = ["6-Wheeler Truck", "10-Wheeler Truck", "Van", "Motorcycle", "Multicab"];
 
+const PRODUCE_TYPES = [
+  "Eggplant (Talong)",
+  "Tomato (Kamatis)",
+  "Cabbage (Repolyo)",
+  "Corn (Mais)",
+  "Potato (Patatas)",
+  "Carrot (Karot)",
+  "Onion (Sibuyas)",
+  "Garlic (Bawang)",
+  "Ginger (Luya)",
+  "Green Beans (Sitaw)",
+  "Squash (Kalabasa)",
+  "Bitter Gourd (Ampalaya)",
+  "Cucumber (Pipino)",
+  "Bell Pepper (Sili)",
+  "Chili Pepper (Siling Labuyo)",
+  "Lettuce (Letsugas)",
+  "Spinach (Kangkong)",
+  "Okra (Okra)",
+  "Radish (Labanos)",
+  "Sweet Potato (Kamote)",
+];
+
+const ORIGIN_OPTIONS = [
+  "Benguet",
+  "Baguio City",
+  "Ifugao",
+  "Kalinga",
+  "Mountain Province",
+  "Kayapa",
+  "Ambaguio",
+  "Aritao",
+  "Bagabag",
+  "Bambang",
+  "Bayombong",
+  "Diadi",
+  "Dupax del Norte",
+  "Dupax del Sur",
+  "Kasibu",
+  "Quezon",
+  "Santa Fe",
+  "Solano",
+  "Villaverde",
+];
+
 let lineIdCounter = 1;
 function newLine() {
-  return { id: lineIdCounter++, produce: "", farmer: "", weight: "" };
+  return { id: lineIdCounter++, produce: "", origin: "", weight: "" };
 }
 
 export default function WalkInEntry({ onSave, onCancel }) {
   const [fullName, setFullName] = useState("");
-  const [licenseNumber, setLicenseNumber] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [plateNumber, setPlateNumber] = useState("");
   const [vehicleType, setVehicleType] = useState("6-Wheeler Truck");
@@ -34,7 +78,6 @@ export default function WalkInEntry({ onSave, onCancel }) {
   function handleSave() {
     onSave?.({
       fullName,
-      licenseNumber,
       contactNumber,
       plateNumber,
       vehicleType,
@@ -54,7 +97,7 @@ export default function WalkInEntry({ onSave, onCancel }) {
       </div>
 
       <p className="walkin-section-label">Driver Details</p>
-      <div className="walkin-grid-3">
+      <div className="walkin-grid-2">
         <div>
           <label className="walkin-field-label">Full Name</label>
           <TextField
@@ -63,16 +106,6 @@ export default function WalkInEntry({ onSave, onCancel }) {
             placeholder="e.g. Ramon Villanueva"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="walkin-field-label">License Number</label>
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="N01-12-XXXXXX"
-            value={licenseNumber}
-            onChange={(e) => setLicenseNumber(e.target.value)}
           />
         </div>
         <div>
@@ -119,17 +152,39 @@ export default function WalkInEntry({ onSave, onCancel }) {
         {lines.map((line) => (
           <div className="walkin-produce-line" key={line.id}>
             <TextField
+              select
               size="small"
               placeholder="Produce type"
               value={line.produce}
               onChange={(e) => updateLine(line.id, "produce", e.target.value)}
-            />
+              displayEmpty
+            >
+              <MenuItem value="" disabled>
+                Select produce type
+              </MenuItem>
+              {PRODUCE_TYPES.map((p) => (
+                <MenuItem key={p} value={p}>
+                  {p}
+                </MenuItem>
+              ))}
+            </TextField>
             <TextField
+              select
               size="small"
-              placeholder="Farmer / source"
-              value={line.farmer}
-              onChange={(e) => updateLine(line.id, "farmer", e.target.value)}
-            />
+              placeholder="Origin"
+              value={line.origin}
+              onChange={(e) => updateLine(line.id, "origin", e.target.value)}
+              displayEmpty
+            >
+              <MenuItem value="" disabled>
+                Select origin
+              </MenuItem>
+              {ORIGIN_OPTIONS.map((o) => (
+                <MenuItem key={o} value={o}>
+                  {o}
+                </MenuItem>
+              ))}
+            </TextField>
             <TextField
               size="small"
               placeholder="Weight (kg)"
@@ -151,17 +206,6 @@ export default function WalkInEntry({ onSave, onCancel }) {
           <span className="walkin-total-label">Total declared weight</span>
           <span className="walkin-total-value">{totalWeight} kg</span>
         </div>
-      </div>
-
-      <div className="walkin-id-capture">
-        <div className="walkin-id-capture-left">
-          <span className="walkin-id-icon">🪪</span>
-          <div>
-            <p className="walkin-id-title">Capture valid ID</p>
-            <p className="walkin-id-subtitle">Take a photo of the driver's license</p>
-          </div>
-        </div>
-        <button className="walkin-capture-btn">Capture Photo</button>
       </div>
 
       <div className="walkin-actions">

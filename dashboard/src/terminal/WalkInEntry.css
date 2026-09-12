@@ -51,13 +51,6 @@
   margin-bottom: 20px;
 }
 
-.walkin-grid-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
 .walkin-field-label {
   display: block;
   font-size: 0.72rem;
@@ -70,12 +63,12 @@
   background-color: #f0fdf4;
   border-radius: 12px;
   padding: 16px;
-  margin-bottom: 20px;
+  margin-bottom: auto;
 }
 
 .walkin-produce-line {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 0.7fr auto;
+  grid-template-columns: 1.3fr 1.3fr 0.9fr auto;
   gap: 10px;
   margin-bottom: 10px;
   align-items: center;
@@ -125,57 +118,6 @@
   font-size: 0.9rem;
   font-weight: 700;
   color: #111827;
-}
-
-.walkin-id-capture {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px dashed #d1d5db;
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: auto;
-}
-
-.walkin-id-capture-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.walkin-id-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background-color: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
-}
-
-.walkin-id-title {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-}
-
-.walkin-id-subtitle {
-  font-size: 0.7rem;
-  color: #9ca3af;
-  margin: 2px 0 0;
-}
-
-.walkin-capture-btn {
-  border: 1px solid #d1d5db;
-  background-color: #ffffff;
-  color: #374151;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
 }
 
 .walkin-actions {

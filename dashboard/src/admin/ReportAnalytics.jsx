@@ -12,6 +12,8 @@ import {
   Button,
   Avatar,
 } from "@mui/material";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import TopBar from "./TopBar";
 import StatCard from "./StatCard";
 import StatusChip from "./StatusChip";
@@ -22,6 +24,14 @@ const RANK_COLORS = { 1: "#14532d", 2: "#166534", 3: "#b45309" };
 
 // TODO: point this at your real API base URL (e.g. via an env var)
 const API_BASE = "/api";
+
+const DATE_RANGE_OPTIONS = [
+  { value: "today", label: "Today" },
+  { value: "yesterday", label: "Yesterday" },
+  { value: "7d", label: "Last 7 Days" },
+  { value: "month", label: "This Month" },
+  { value: "custom", label: "Custom Range" },
+];
 
 const EMPTY_REPORT = {
   stats: null,
@@ -35,32 +45,41 @@ export default function ReportsAnalytics() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let cancelled = false;
-    async function loadReport() {
-      setLoading(true);
-      setError("");
-      try {
-        const res = await fetch(`${API_BASE}/reports`);
-        if (!res.ok) throw new Error(`Server responded with ${res.status}`);
-        const json = await res.json();
-        if (!cancelled) setData({ ...EMPTY_REPORT, ...json });
-      } catch (err) {
-        if (!cancelled) {
-          setError("Unable to load report data. Showing no data until the server responds.");
-          setData(EMPTY_REPORT);
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
+  const [dateRange, setDateRange] = useState("today");
+  const [customFrom, setCustomFrom] = useState("");
+  const [customTo, setCustomTo] = useState("");
+
+  async function loadReport() {
+    setLoading(true);
+    setError("");
+    try {
+      const params = new URLSearchParams({ range: dateRange });
+      if (dateRange === "custom") {
+        if (customFrom) params.set("from", customFrom);
+        if (customTo) params.set("to", customTo);
       }
+
+      const res = await fetch(`${API_BASE}/reports?${params.toString()}`);
+      if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+      const json = await res.json();
+      setData({ ...EMPTY_REPORT, ...json });
+    } catch (err) {
+      setError("Unable to load report data. Showing no data until the server responds.");
+      setData(EMPTY_REPORT);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     loadReport();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    // Custom range re-fetches only when "Apply" is clicked (see button below),
+    // so it's intentionally excluded from this dependency list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateRange]);
 
   const { stats, commodityOrigins, topGoods, inflowLogs } = data;
+  const activeRangeLabel = DATE_RANGE_OPTIONS.find((opt) => opt.value === dateRange)?.label;
 
   return (
     <Box>
@@ -68,6 +87,59 @@ export default function ReportsAnalytics() {
 
       {error && <p className="empty-state-text" style={{ color: "#b45309" }}>{error}</p>}
       {loading && <p className="empty-state-text">Loading report data…</p>}
+
+      <Box className="stats-filter-bar">
+        <Box className="stats-filter-left">
+          <CalendarTodayOutlinedIcon className="stats-filter-icon" />
+          <span className="stats-filter-label">Data range</span>
+          <span className="stats-filter-active-pill">{activeRangeLabel}</span>
+        </Box>
+
+        <Box className="stats-filter-right">
+          <Box className="stats-filter-select-wrap">
+            <select
+              className="stats-filter-select"
+              value={dateRange}
+              onChange={(e) => setDateRange(e.target.value)}
+            >
+              {DATE_RANGE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <KeyboardArrowDownOutlinedIcon className="stats-filter-chevron" />
+          </Box>
+
+          {dateRange === "custom" && (
+            <>
+              <Box className="stats-filter-divider" />
+              <input
+                type="date"
+                className="stats-filter-date"
+                value={customFrom}
+                onChange={(e) => setCustomFrom(e.target.value)}
+              />
+              <span className="stats-filter-dash">to</span>
+              <input
+                type="date"
+                className="stats-filter-date"
+                value={customTo}
+                onChange={(e) => setCustomTo(e.target.value)}
+              />
+              <Button
+                size="small"
+                variant="contained"
+                className="btn-solid-sm"
+                onClick={loadReport}
+                disabled={loading || !customFrom || !customTo}
+              >
+                Apply
+              </Button>
+            </>
+          )}
+        </Box>
+      </Box>
 
       <Box className="reports-stats-grid">
         <StatCard
